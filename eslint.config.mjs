@@ -6,6 +6,7 @@ import js from "@eslint/js";
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
+import neostandard from "neostandard";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,11 +23,10 @@ const eslintConfig = defineConfig([
   },
   ...nextVitals,
   ...nextTs,
-  ...compat.extends(
-    "standard",
-    // "plugin:tailwindcss/recommended",
-    "prettier"
-  ),
+  ...neostandard({
+    ts: true, // Enable TypeScript support
+  }),
+  ...compat.extends("prettier"),
   {
     rules: {
       "import/order": [
